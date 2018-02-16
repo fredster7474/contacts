@@ -29,15 +29,30 @@ end
 loop do
   index(contacts)
 
-  response = ask("Who would you like to see (q to quit)? ")
+  response = ask("Who would you like to see (n for new, q to quit)? ")
 
   break if response == "q"
 
-  id = response.to_i
-  contact = contacts[id - 1]
+  if response == "n"
+    contact = {}
+
+    puts "Enter contact info:"
+
+    contact[:name]  = ask("Name? ")
+    contact[:phone] = ask("Phone? ")
+    contact[:email] = ask("Email? ")
+
+    contacts << contact
+
+    puts "New contact created:"
+  else
+    id = response.to_i
+    contact = contacts[id - 1]
 
   puts
   show(contact)
+  end
 end
+
 
 puts "Bye!"
